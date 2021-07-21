@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func newServer(path string, mode bool) *gin.Engine {
+func newServer(path string, mode, try bool) *gin.Engine {
 	if mode {
 		gin.SetMode(gin.DebugMode)
 	}else {
@@ -24,13 +24,14 @@ func newServer(path string, mode bool) *gin.Engine {
 			params.Latency,
 			params.ErrorMessage)
 	}))
-
+	g.Use(MiddlewareTryFile(try))
 	g.Static("/", path)
+
 	return g
 }
 
-func runServer(path string, port int, test bool) error {
-	server := newServer(path, test)
+func runServer(path string, port int, test, try bool) error {
+	server := newServer(path, test, try)
 
 	return server.Run(fmt.Sprintf(":%d", port))
 }

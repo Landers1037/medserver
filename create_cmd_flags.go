@@ -19,6 +19,12 @@ func getFlagsGroup() []cli.Flag {
 			Usage:   "set default static file path",
 			Value:   ".",
 		},
+		&cli.StringFlag{
+			Name:    "index",
+			Aliases: []string{"i", "index_file"},
+			Usage:   "set default index file",
+			Value:   "index.html",
+		},
 		&cli.IntFlag{
 			Name:    "port",
 			Aliases: []string{"po"},
@@ -41,6 +47,12 @@ func getFlagsGroup() []cli.Flag {
 			Name:    "test",
 			Aliases: []string{"t", "testit"},
 			Usage:   "run in a test mode",
+			Value:   false,
+		},
+		&cli.BoolFlag{
+			Name:    "try",
+			Aliases: []string{"tryfile"},
+			Usage:   "run in a try file mode",
 			Value:   false,
 		},
 		&cli.BoolFlag{
